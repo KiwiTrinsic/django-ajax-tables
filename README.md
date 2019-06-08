@@ -35,7 +35,7 @@ This app adds a new Django template tag {% ajax_table %}.
 This is a replacement for the django-tables2 {% render_table %} tag.
 
 To implement the Ajax functionality you will need to add a view which returns the raw table html (example shown below).
-The tag will use that html to render the table on the page.
+The {% ajax_table %} tag will use that html to render the table on the page.
 It will also configure the table sorting and pagination links to perform Ajax calls and in-place updates of the table.
 This will allow you to sort and page through the table without the entire webpage refreshing on each click.
 
@@ -64,23 +64,36 @@ def simple_view(request):
     RequestConfig(request).configure(simple_table)
     return HttpResponse(simple_table.as_html(request))
 ```
-
-Load the django_ajax_tables tags in the template and add ajax_table tags as needed:
+Create a url mapping for the view:
 
 ```
-{% load django_ajax_tables %}
-{% ajax_table "unique_div_id" "simple_view_url" %}
+urlpatterns = [
+    ...,
+    url(r'^simple_url$', simple_view, name='simple_url_name'),
+```
+
+Place ajax_table tags where tables are to be displayed:
+
+```
+{% ajax_table "unique_div_id" "simple_url_name" %}
 ```
 
 ## Usage
 
 The ajax_table tag requires at least two parameters.
 
-- The first parameter is a unique id. This id should not used for any other element on the page. The ajax_table tag will create a <div> with this id to contain the table.
+- The first parameter is a unique id. This id should not used for any other element on the page. The ajax_table tag will create a div element with this id to contain the table.
 - The second parameter is the name of the url that is mapped to the table view.
 - Any additional non-keyword arguments will be passed as positional arguments to the url. If used this will prevent the passing of keyword arguments to the url.
 - The template keyword argument can be used to replace the django-ajax-tables javascript with custom javascript.
 - Any additional keyword arguments will be passed as keyword aguments to the url but only if there were no positional arguments passed to the url.
 
+### Example with positional arguments
+```
+{% ajax_table "unique_div_id" "simple_url_name" arg1 arg2 %}
+```
 
-
+### Example with keyword arguments
+```
+{% ajax_table "unique_div_id" "simple_url_name" filter1=arg1 filter2=arg2 %}
+```

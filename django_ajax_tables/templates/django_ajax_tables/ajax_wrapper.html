@@ -1,0 +1,20 @@
+<div id="{{ ajax_divname }}"></div>
+
+<script type='text/javascript'>
+
+    function update_{{ ajax_divname }}(querystring) {
+        $.get("{{ ajax_tableurl }}" + querystring, function(data) { 
+            $('#{{ ajax_divname }}').html(data);
+            
+            $('#{{ ajax_divname }}').find('th, .pagination').find('a').each(function(){
+                let new_querystring = $(this).attr('href');
+                $(this).click(function(e) {
+                    e.preventDefault();
+                    update_{{ ajax_divname }}(new_querystring)
+                });
+            })
+        });
+    }
+
+    update_{{ ajax_divname }}('');
+</script>

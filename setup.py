@@ -4,10 +4,10 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="django_ajax_tables_trinsic",
-    version="0.0.6",
+    name="django_ajax_tables",
+    version="1.0.0",
     author="Dustin Cotton",
-    author_email="developer@stormpurple.net",
+    author_email="dcotton@stormpurple.net",
     description="Django tag for ajax-enabled tables",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -19,7 +19,7 @@ setuptools.setup(
         "Framework :: Django :: 2.0",
         "Framework :: Django :: 2.1",
         "Framework :: Django :: 2.2",
-        "Environment :: Web Environment"
+        "Environment :: Web Environment",
         "License :: OSI Approved :: MIT License",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",

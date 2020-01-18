@@ -10,7 +10,6 @@ This app is an enhancement for [django-tables2](https://pypi.python.org/pypi/dja
 - Python 3
 - Django (version 2+)
 - [django-tables2](https://pypi.python.org/pypi/django-tables2)
-- jQuery (for the Ajax calls)
 
 ## Installation
 

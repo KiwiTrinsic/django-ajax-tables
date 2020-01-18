@@ -2,18 +2,35 @@
 
 <script type='text/javascript'>
 
-    function update_{{ ajax_divname }}(querystring = '', url = "{{ ajax_tableurl }}") {
-        $.get(url + querystring, function(data) { 
-            $('#{{ ajax_divname }}').html(data);
-            
-            $('#{{ ajax_divname }}').find('th, .pagination').find('a').each(function(){
-                let new_querystring = $(this).attr('href');
-                $(this).click(function(e) {
+    function _replace_links_{{ ajax_divname }}(elements) {
+        for (var x = 0; x < elements.length; x++) {
+            var links = elements[x].getElementsByTagName('A');
+            for (var y = 0; y < links.length; y++) {
+                let new_querystring = links[y].getAttribute('href');
+                links[y].onclick = function(e) {
                     e.preventDefault();
-                    update_{{ ajax_divname }}(new_querystring)
-                });
-            })
-        });
+                    update_{{ ajax_divname }}(new_querystring);
+                };
+            }
+        }
+    };
+    
+    function update_{{ ajax_divname }}(querystring = '', url = "{{ ajax_tableurl }}") {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE ) {
+                if (xhr.status == 200) {
+                    var div = document.getElementById('{{ ajax_divname }}');
+
+                    div.innerHTML = xhr.responseText;
+
+                    _replace_links_{{ ajax_divname }}(div.getElementsByTagName('TH'));
+                    _replace_links_{{ ajax_divname }}(div.getElementsByClassName('pagination'));
+                }
+            }
+        };
+        xhr.open('GET', url + querystring, true);
+        xhr.send();
     }
 
     update_{{ ajax_divname }}('', "{{ ajax_tableurl }}");

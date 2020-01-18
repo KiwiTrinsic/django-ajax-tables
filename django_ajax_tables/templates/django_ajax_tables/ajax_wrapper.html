@@ -2,14 +2,16 @@
 
 <script type='text/javascript'>
 
-    function _replace_links_{{ ajax_divname }}(elements) {
+    function _replace_links_{{ ajax_divname }}(url, elements) {
         for (var x = 0; x < elements.length; x++) {
             var links = elements[x].getElementsByTagName('A');
             for (var y = 0; y < links.length; y++) {
                 let new_querystring = links[y].getAttribute('href');
+                alert(links[y].href);
+                alert(new_querystring);
                 links[y].onclick = function(e) {
                     e.preventDefault();
-                    update_{{ ajax_divname }}(new_querystring);
+                    update_{{ ajax_divname }}(new_querystring, url);
                 };
             }
         }
@@ -24,8 +26,8 @@
 
                     div.innerHTML = xhr.responseText;
 
-                    _replace_links_{{ ajax_divname }}(div.getElementsByTagName('TH'));
-                    _replace_links_{{ ajax_divname }}(div.getElementsByClassName('pagination'));
+                    _replace_links_{{ ajax_divname }}(url, div.getElementsByTagName('TH'));
+                    _replace_links_{{ ajax_divname }}(url, div.getElementsByClassName('pagination'));
                 }
             }
         };

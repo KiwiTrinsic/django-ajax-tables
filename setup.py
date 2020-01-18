@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="django_ajax_tables",
-    version="1.0.0",
+    version="1.1.1",
     author="Dustin Cotton",
     author_email="dcotton@stormpurple.net",
     description="Django tag for ajax-enabled tables",

@@ -7,8 +7,6 @@
             var links = elements[x].getElementsByTagName('A');
             for (var y = 0; y < links.length; y++) {
                 let new_querystring = links[y].getAttribute('href');
-                alert(links[y].href);
-                alert(new_querystring);
                 links[y].onclick = function(e) {
                     e.preventDefault();
                     update_{{ ajax_divname }}(new_querystring, url);

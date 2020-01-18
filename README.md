@@ -97,3 +97,18 @@ The ajax_table tag requires at least two parameters.
 ```
 {% ajax_table "unique_div_id" "simple_url_name" filter1=arg1 filter2=arg2 %}
 ```
+
+## Javascript API
+
+The table loading function can also be caled direcly in javascript. 
+This can be useful if the data needs to be refreshed.
+The function name will be in the form of *update_<id>* where <id> is the unique id parameter that was pased in to the ajax_table tag.
+
+The function can take two optional parameters.
+The first parameter is a query string which will appened to the url.
+This defaults to an empty string. 
+The second parameter is a url which will be used by the ajax call to fetch the table data.
+This defaults to the original url as created by the ajax_table tag.
+
+Together these two parameters allow the table data to be loaded with different query parameters or from entirly different urls.
+

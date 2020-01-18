@@ -2,8 +2,8 @@
 
 <script type='text/javascript'>
 
-    function update_{{ ajax_divname }}(querystring) {
-        $.get("{{ ajax_tableurl }}" + querystring, function(data) { 
+    function update_{{ ajax_divname }}(querystring = '', url = "{{ ajax_tableurl }}") {
+        $.get(url + querystring, function(data) { 
             $('#{{ ajax_divname }}').html(data);
             
             $('#{{ ajax_divname }}').find('th, .pagination').find('a').each(function(){
@@ -16,5 +16,5 @@
         });
     }
 
-    update_{{ ajax_divname }}('');
+    update_{{ ajax_divname }}('', "{{ ajax_tableurl }}");
 </script>
